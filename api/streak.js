@@ -66,46 +66,44 @@ export default async function handler(req, res) {
 
     const fmt = d => d ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-';
 
-    // Motivating touches: flame color intensity scales with streak length,
-    // and a nudge message instead of a flat "0" when streak is at zero.
     const flameColor = currentStreak >= 30 ? '#FF4500' : currentStreak >= 7 ? t.fire : currentStreak > 0 ? '#FFC966' : '#484F58';
     const currentRangeText = currentStreak > 0 ? `${fmt(currentStart)} - present` : 'Start your streak today';
 
     const svg = `
-<svg width="495" height="210" viewBox="0 0 495 210" xmlns="http://www.w3.org/2000/svg">
+<svg width="495" height="230" viewBox="0 0 495 230" xmlns="http://www.w3.org/2000/svg">
   <style>
-    .num { font: 700 30px 'Segoe UI', sans-serif; fill: ${t.text}; }
-    .label { font: 700 14px 'Segoe UI', sans-serif; fill: ${t.label}; letter-spacing: 0.5px; }
+    .num { font: 700 28px 'Segoe UI', sans-serif; fill: ${t.text}; }
+    .label { font: 700 13px 'Segoe UI', sans-serif; fill: ${t.label}; letter-spacing: 0.5px; }
     .range { font: 400 12px 'Segoe UI', sans-serif; fill: ${t.label}; }
-    .fire { font-size: 26px; }
+    .fire { font-size: 22px; }
   </style>
-  <rect x="0.5" y="0.5" width="494" height="209" rx="12" fill="${t.bg}" stroke="${t.border}"/>
+  <rect x="0.5" y="0.5" width="494" height="229" rx="12" fill="${t.bg}" stroke="${t.border}"/>
 
   <!-- Total Contributions -->
   <g transform="translate(85,0)">
-    <text x="0" y="80" text-anchor="middle" class="num">${total.toLocaleString()}</text>
-    <text x="0" y="106" text-anchor="middle" class="label">TOTAL CONTRIBUTIONS</text>
-    <text x="0" y="128" text-anchor="middle" class="range">${fmt(days[0]?.date)} - present</text>
+    <text x="0" y="112" text-anchor="middle" class="num">${total.toLocaleString()}</text>
+    <text x="0" y="178" text-anchor="middle" class="label">TOTAL CONTRIBUTIONS</text>
+    <text x="0" y="200" text-anchor="middle" class="range">${fmt(days[0]?.date)} - present</text>
   </g>
 
-  <line x1="167" y1="35" x2="167" y2="175" stroke="${t.border}"/>
+  <line x1="167" y1="40" x2="167" y2="195" stroke="${t.border}"/>
 
   <!-- Current Streak -->
   <g transform="translate(247,0)">
     <text x="0" y="38" text-anchor="middle" class="fire">🔥</text>
-    <circle cx="0" cy="95" r="46" fill="none" stroke="${flameColor}" stroke-width="5"/>
-    <text x="0" y="104" text-anchor="middle" class="num">${currentStreak}</text>
-    <text x="0" y="152" text-anchor="middle" class="label" fill="${flameColor}">CURRENT STREAK</text>
-    <text x="0" y="172" text-anchor="middle" class="range">${currentRangeText}</text>
+    <circle cx="0" cy="104" r="48" fill="none" stroke="${flameColor}" stroke-width="5"/>
+    <text x="0" y="112" text-anchor="middle" class="num">${currentStreak}</text>
+    <text x="0" y="178" text-anchor="middle" class="label" fill="${flameColor}">CURRENT STREAK</text>
+    <text x="0" y="200" text-anchor="middle" class="range">${currentRangeText}</text>
   </g>
 
-  <line x1="329" y1="35" x2="329" y2="175" stroke="${t.border}"/>
+  <line x1="329" y1="40" x2="329" y2="195" stroke="${t.border}"/>
 
   <!-- Longest Streak -->
   <g transform="translate(410,0)">
-    <text x="0" y="80" text-anchor="middle" class="num">${longest}</text>
-    <text x="0" y="106" text-anchor="middle" class="label">LONGEST STREAK</text>
-    <text x="0" y="128" text-anchor="middle" class="range">${longest > 0 ? fmt(longestStart) + ' - ' + fmt(longestEnd) : '-'}</text>
+    <text x="0" y="112" text-anchor="middle" class="num">${longest}</text>
+    <text x="0" y="178" text-anchor="middle" class="label">LONGEST STREAK</text>
+    <text x="0" y="200" text-anchor="middle" class="range">${longest > 0 ? fmt(longestStart) + ' - ' + fmt(longestEnd) : '-'}</text>
   </g>
 </svg>`.trim();
 
