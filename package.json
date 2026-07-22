@@ -1,0 +1,7 @@
+{
+  "name": "github-streak-svg",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Self-hosted GitHub streak stats SVG generator",
+  "license": "MIT"
+}
